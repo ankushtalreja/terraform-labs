@@ -63,7 +63,7 @@ resource "azurerm_virtual_network_gateway" "HUB_gateway" {
   vpn_type = "routebased"
   count = "${length(var.locations)}"
   active_active = false
-  enable_bgp    = true
+  enable_bgp    = false
   sku           = "Basic"
     ip_configuration {
     name                          = "vnetGatewayConfig"
@@ -104,3 +104,119 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionWestEuropeto
   
 }
 
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionUkSouthtoNortheurope" {
+
+     name                = "HubconnectionUkSouthtoWesteurope"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 0)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 0)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 0)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 2)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropetoUKSouth" {
+
+     name                = "HubconnectionWestEuropetoUKSouth"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 2)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 2)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 2)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 0)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoNortheurope" {
+
+     name                = "HubconnectionUkSouthtoWesteurope"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 1)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 1)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 2)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropetoUKWest" {
+
+     name                = "HubconnectionWestEuropetoUKSouth"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 2)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 2)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 2)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoWesteurope" {
+
+     name                = "HubconnectionUkSouthtoWesteurope"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 1)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 1)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 3)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionWestEuropetoUKWest" {
+
+     name                = "HubconnectionWestEuropetoUKSouth"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 3)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 3)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 3)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+
+
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoUKSouth" {
+
+     name                = "HubconnectionUkSouthtoWesteurope"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 1)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 1)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 0)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
+resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKSouthtoUKWest" {
+
+     name                = "HubconnectionWestEuropetoUKSouth"
+  location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 0)}"
+  resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 0)}"
+
+  type                            = "Vnet2Vnet"
+  virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 0)}"
+  peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
+
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  
+  
+}
