@@ -106,7 +106,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionWestEuropeto
 
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionUkSouthtoNortheurope" {
 
-     name                = "HubconnectionUkSouthtoWesteurope"
+     name                = "HubconnectionUkSouthtoNortheurope"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 0)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 0)}"
 
@@ -120,7 +120,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionUkSouthtoNor
 }
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropetoUKSouth" {
 
-     name                = "HubconnectionWestEuropetoUKSouth"
+     name                = "HubconnectionNorthEuropetoUKSouth"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 2)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 2)}"
 
@@ -135,7 +135,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropet
 
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoNortheurope" {
 
-     name                = "HubconnectionUkSouthtoWesteurope"
+     name                = "HubconnectionUKWesttoNortheurope"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 1)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 1)}"
 
@@ -149,7 +149,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoNort
 }
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropetoUKWest" {
 
-     name                = "HubconnectionWestEuropetoUKSouth"
+     name                = "HubconnectionNorthEuropetoUKWest"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 2)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 2)}"
 
@@ -164,7 +164,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropet
 
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoWesteurope" {
 
-     name                = "HubconnectionUkSouthtoWesteurope"
+     name                = "HubconnectionUKWesttoWesteurope"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 1)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 1)}"
 
@@ -178,7 +178,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoWest
 }
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionWestEuropetoUKWest" {
 
-     name                = "HubconnectionWestEuropetoUKSouth"
+     name                = "HubconnectionWestEuropetoUKWest"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 3)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 3)}"
 
@@ -194,7 +194,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionWestEuropeto
 
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoUKSouth" {
 
-     name                = "HubconnectionUkSouthtoWesteurope"
+     name                = "HubconnectionUKWesttoUKSouth"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 1)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 1)}"
 
@@ -208,7 +208,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKWesttoUKSo
 }
 resource "azurerm_virtual_network_gateway_connection" "HubconnectionUKSouthtoUKWest" {
 
-     name                = "HubconnectionWestEuropetoUKSouth"
+     name                = "HubconnectionUKSouthtoUKWest"
   location            = "${element(azurerm_resource_group.HUB_Azure.*.location, 0)}"
   resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, 0)}"
 

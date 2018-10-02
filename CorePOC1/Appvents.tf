@@ -51,6 +51,7 @@ resource "azurerm_virtual_network_peering" "AppNEtoHUBNE" {
   virtual_network_name      = "${element(azurerm_virtual_network.app_Vnet.*.name, 0)}"
   remote_virtual_network_id = "${element(azurerm_virtual_network.HUb_vnets.*.id, 2)}"
   allow_virtual_network_access = true
+  use_remote_gateways = true
   
 
 }
@@ -61,26 +62,28 @@ resource "azurerm_virtual_network_peering" "HUBNEtoAppNE" {
   virtual_network_name      = "${element(azurerm_virtual_network.HUb_vnets.*.name, 2)}"
   remote_virtual_network_id = "${element(azurerm_virtual_network.app_Vnet.*.id, 0)}"
   allow_virtual_network_access = true
+  allow_gateway_transit = true
   
 
 }
 
 resource "azurerm_virtual_network_peering" "AppWEtoHUBWE" {
-  name                      = "AppNEtoHUBNE"
+  name                      = "AppWEtoHUBWE"
   resource_group_name       = "${element(azurerm_resource_group.App_RG.*.name, 1)}"
   virtual_network_name      = "${element(azurerm_virtual_network.app_Vnet.*.name, 1)}"
   remote_virtual_network_id = "${element(azurerm_virtual_network.HUb_vnets.*.id, 3)}"
   allow_virtual_network_access = true
-  
+  use_remote_gateways = true
 
 }
 
 resource "azurerm_virtual_network_peering" "HUBWEtoAppWE" {
-  name                      = "HUBNEtoAppNE"
+  name                      = "HUBWEtoAppWE"
   resource_group_name       = "${element(azurerm_resource_group.HUB_Azure.*.name, 3)}"
   virtual_network_name      = "${element(azurerm_virtual_network.HUb_vnets.*.name, 3)}"
   remote_virtual_network_id = "${element(azurerm_virtual_network.app_Vnet.*.id, 1)}"
   allow_virtual_network_access = true
+  allow_gateway_transit = true
   
 
 }
