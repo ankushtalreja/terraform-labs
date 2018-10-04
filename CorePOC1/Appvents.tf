@@ -42,6 +42,7 @@ resource "azurerm_subnet" "NEVnetcompute" {
     address_prefix       = "${cidrsubnet("${var.appaddspace[count.index]}", 3, 2)}"
     count = "${length(var.applocations)}"
    resource_group_name = "${element(azurerm_resource_group.App_RG.*.name, count.index)}"
+   service_endpoints = ["Microsoft.Sql"]
   
 }
 
