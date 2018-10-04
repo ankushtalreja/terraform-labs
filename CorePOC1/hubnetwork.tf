@@ -165,7 +165,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropet
   virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 2)}"
   peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
 
-  shared_key = "${azurerm_key}"
+  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
   
   
 }
