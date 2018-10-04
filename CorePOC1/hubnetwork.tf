@@ -1,3 +1,10 @@
+
+data "azurermke" "name" {
+  
+}
+
+
+
 resource "azurerm_resource_group" "HUB_Azure" {
 
     name = "HUB_Azure-${var.locations[count.index]}"
@@ -23,6 +30,7 @@ resource "azurerm_subnet" "gwsubnt" {
     address_prefix       = "${cidrsubnet("${var.addspace[count.index]}", 3, 0)}"
     count = "${length(var.locations)}"
    resource_group_name = "${element(azurerm_resource_group.HUB_Azure.*.name, count.index)}"
+   
   
 }
 resource "azurerm_subnet" "data" {
@@ -157,7 +165,7 @@ resource "azurerm_virtual_network_gateway_connection" "HubconnectionNorthEuropet
   virtual_network_gateway_id      = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 2)}"
   peer_virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.HUB_gateway.*.id, 1)}"
 
-  shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  shared_key = "${azurerm_key}"
   
   
 }
