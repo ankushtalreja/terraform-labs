@@ -1,3 +1,5 @@
+
+//Index- 0 for North Europe, 1 for West Europe
 variable "locations" {
     
   default = ["NorthEurope", "WestEurope"]
@@ -10,15 +12,44 @@ variable "ResourcegroupName" {
    description = "Specify the name of resource groups respectively"
 }
 
-variable "CircuitID" {
+variable "UKSOuthCircuitID" {
     
-  default = ["NEcircuitID", "UKSouthcicuitID"]
-   description = "circuit ID of the Vnets respectively"
+  default = "dsdsds"
+   description = "circuit ID of the Express Route circuit in UK South "
+}
+
+
+variable "NECircuitID" {
+    
+  default = "NEcircuitID"
+   description = "circuit ID of the Express Route circuit in North Europe "
+}
+
+variable "UKSOuthCircuitAUthKey" {
+    
+  default = "dsdsds"
+   description = "circuit authorization Key of the Express Route circuit in UK South "
+}
+
+variable "NECircuitAuthkey" {
+    
+  default = "ddd"
+   description = "circuit authorization key of the Express Route circuit in North Europe "
 }
 variable "IPspace" {
     
-  default = ["10.0.40.0/26", "10.0.41.0/26"]
+  default = ["10.0.40.0/24", "10.0.41.0/24"]
    description = "Specify the address space for the vnets respectively"
+}
+
+variable "KVsubnetNSGname" {
+  default = ["kvsubnsgNE", "kvsubnsgUKS"]
+   description = "Specify the name of NSG for the Key Vault subnets respectively"
+}
+
+variable "MGMTsubnetNSGname" {
+  default = ["MGMTsubnsgNE", "MGMTsubnsgUKS"]
+   description = "Specify the name of NSG for the management subnets respectively"
 }
 
 variable "VNetname" {
@@ -27,13 +58,29 @@ variable "VNetname" {
    description = "Specify the name of vnets respectively"
 }
 
+variable "mgmtsubnetname" {
+    
+  default = ["NEmgmtsubnet","UKSmgmtsubnet"]
+   description = "Specify the name of management subnets for both regions respectively"
+}
+
+variable "keyvaultsubnetname" {
+    
+  default = ["NEKVSUbnet","UKSKVsubnet"]
+   description = "Specify the name of key Vault subnets for both regions respectively"
+}
+
 variable "GatewayName" {
     
   default = ["cockpitNE_vnetGW","CockpitWE_vnetGW"]
   description = "Specify the name of Gateways respectively"
 
 }
-
+variable "gatewaySKU" {
+    
+  default = "Standard"
+   description = "Gateway SKU. Options are Standard, HighPerformance, UltraPerformance"
+}
 variable "PublicIPName" {
     
   default = ["cockpitNE_GWPIP","CockpitWE_GWPIP"]

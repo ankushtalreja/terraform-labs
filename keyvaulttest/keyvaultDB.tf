@@ -53,7 +53,7 @@ resource "azurerm_key_vault_secret" "test" {
     environment = "Production"
   }
 }
-data "azurerm_key_vault_secret" "testsec" {
+data "azurerm_key_vault_access_policy" "testsec" {
   name      = "DBpass"
  vault_uri = "${azurerm_key_vault.test.vault_uri}"
  

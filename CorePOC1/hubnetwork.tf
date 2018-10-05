@@ -1,8 +1,4 @@
 
-data "azurermke" "name" {
-  
-}
-
 
 
 resource "azurerm_resource_group" "HUB_Azure" {
