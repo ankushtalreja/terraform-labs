@@ -50,7 +50,7 @@ resource "azurerm_subnet" "KVsubnet" {
     address_prefix       = "${cidrsubnet("${var.IPspace[count.index]}", 3, 1)}"
     count = "${length(var.locations)}"
    resource_group_name = "${element(azurerm_resource_group.VnetsRG.*.name, count.index)}"
-   service_endpoints = ["Microsoft.SQL"]
+   service_endpoints = ["Microsoft.KeyVault"]
    network_security_group_id ="${element(azurerm_network_security_group.KVsubnetNSG.*.id, count.index)}"
   
 }
@@ -66,7 +66,7 @@ location = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
 }
 
 //create Gateway
-/*resource "azurerm_virtual_network_gateway" "Vnet_gateway" {
+resource "azurerm_virtual_network_gateway" "Vnet_gateway" {
   
   name = "${var.GatewayName[count.index]}"
   resource_group_name = "${element(azurerm_resource_group.VnetsRG.*.name, count.index)}"
@@ -84,38 +84,65 @@ location = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
 
 }
 
-connecting borth gateways to to North Europe Cicuit
-resource "azurerm_virtual_network_gateway_connection" "VneconnectiontoNEcircuit" {
+//connecting both gateways to North Europe Cicuit
+
+//If vnets created are in non-prod subscription i.e. authorization key required
+resource "azurerm_virtual_network_gateway_connection" "VnteconnectiontoNEcircuitnonprod" {
 
      name                = "conntoNEcircuit"
   location            = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
   resource_group_name = "${element(azurerm_resource_group.VnetsRG.*.name, count.index)}"
   type                          = "ExpressRoute"
+  count = "${var.Environment == "N" ? "${length(var.locations)}" : 0}"
   virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.Vnet_gateway.*.id, count.index)}"
 
   express_route_circuit_id = "${var.NECircuitID}"
   authorization_key = "${var.NECircuitAuthkey}"
-
-
-
   
 }
 
-resource "azurerm_virtual_network_gateway_connection" "VneconnectiontoUKSouthcircuit" {
+
+//If vnets created are in prod subscription i.e. authorization key NOT required
+resource "azurerm_virtual_network_gateway_connection" "VnteconnectiontoNEcircuitprod" {
+
+     name                = "conntoNEcircuit"
+  location            = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
+  resource_group_name = "${element(azurerm_resource_group.VnetsRG.*.name, count.index)}"
+  type                          = "ExpressRoute"
+  count = "${var.Environment == "P" ? "${length(var.locations)}" : 0}"
+  virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.Vnet_gateway.*.id, count.index)}"
+
+  express_route_circuit_id = "${var.NECircuitID}"
+  
+  
+}
+
+//connecting both gateways to UkSuuth Cicuit
+//If vnets created are in non-prod subscription i.e. authorization key required
+resource "azurerm_virtual_network_gateway_connection" "VneconnectiontoUKSouthcircuitnonprod" {
 
      name                = "conntoUkSouthcircuit"
   location            = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
   resource_group_name = "${element(azurerm_resource_group.VnetsRG.*.name, count.index)}"
-
+ count = "${var.Environment == "N" ? "${length(var.locations)}" : 0}"
   type                          = "ExpressRoute"
   virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.Vnet_gateway.*.id, count.index)}"
   express_route_circuit_id = "${var.UKSOuthCircuitID}"
   authorization_key = "${var.UKSOuthCircuitAUthKey}"
  
-
-
-  
   
 }
 
-*/
+//If vnets created are in non-prod subscription i.e. authorization key required
+resource "azurerm_virtual_network_gateway_connection" "VneconnectiontoUKSouthcircuitprod" {
+
+     name                = "conntoUkSouthcircuit"
+  location            = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
+  resource_group_name = "${element(azurerm_resource_group.VnetsRG.*.name, count.index)}"
+ count = "${var.Environment == "P" ? "${length(var.locations)}" : 0}"
+  type                          = "ExpressRoute"
+  virtual_network_gateway_id = "${element(azurerm_virtual_network_gateway.Vnet_gateway.*.id, count.index)}"
+  express_route_circuit_id = "${var.UKSOuthCircuitID}"
+
+   
+}

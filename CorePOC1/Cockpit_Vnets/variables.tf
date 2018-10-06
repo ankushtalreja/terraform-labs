@@ -12,29 +12,30 @@ variable "ResourcegroupName" {
    description = "Specify the name of resource groups respectively"
 }
 
+variable "NECircuitID" {
+    
+  default = "/subscriptions/98c9f11a-7427-4292-8d76-5e02713d6cd4/resourceGroups/HUB_Azure-NorthEurope/providers/Microsoft.Network/virtualNetworks/HUB_Vnet-NorthEurope"
+   description = "circuit ID of the Express Route circuit in North Europe "
+}
 variable "UKSOuthCircuitID" {
     
-  default = "dsdsds"
+  default = "/subscriptions/98c9f11a-7427-4292-8d76-5e02713d6cd4/resourceGroups/HUB_Azure-NorthEurope/providers/Microsoft.Network/virtualNetworks/HUB_Vnet-NorthEurope"
    description = "circuit ID of the Express Route circuit in UK South "
 }
 
 
-variable "NECircuitID" {
-    
-  default = "NEcircuitID"
-   description = "circuit ID of the Express Route circuit in North Europe "
-}
+
 
 variable "UKSOuthCircuitAUthKey" {
     
   default = "dsdsds"
-   description = "circuit authorization Key of the Express Route circuit in UK South "
+   description = "circuit authorization Key of the Express Route circuit in UK South.Required only if deploying nonprod vnets and gateways. "
 }
 
 variable "NECircuitAuthkey" {
     
   default = "ddd"
-   description = "circuit authorization key of the Express Route circuit in North Europe "
+   description = "circuit authorization key of the Express Route circuit in North Europe.Required only if deploying nonprod vnets and gateways "
 }
 variable "IPspace" {
     
@@ -85,6 +86,13 @@ variable "PublicIPName" {
     
   default = ["cockpitNE_GWPIP","CockpitWE_GWPIP"]
   description = "Specify the name of PublicIps respectively"
+
+}
+
+variable "Environment" {
+    
+  default = "P"
+  description = "Specify N for nonprod or P for prod.If choosing N authorization key for circuit will be required as nonprod vnets are in different subscription"
 
 }
 
