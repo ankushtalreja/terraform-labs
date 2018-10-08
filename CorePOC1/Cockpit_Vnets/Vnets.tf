@@ -65,7 +65,17 @@ resource "azurerm_public_ip" "gatewaypip" {
 location = "${element(azurerm_resource_group.VnetsRG.*.location, count.index)}"
 }
 
+//Can Not Delete lock on resource group
+resource "azurerm_management_lock" "resource-group-levelvnet" {
+  name       = "${var.ResourcegroupName[count.index]}-CNDlock"
+  scope      = "${element(azurerm_resource_group.VnetsRG.*.id, count.index)}"
+  lock_level = "CanNotDelete"
+  notes      = "This Resource Group cannot be deleted"
+  count = "${length(var.ResourcegroupName)}"
+}
+
 //create Gateway
+/*
 resource "azurerm_virtual_network_gateway" "Vnet_gateway" {
   
   name = "${var.GatewayName[count.index]}"
@@ -146,3 +156,4 @@ resource "azurerm_virtual_network_gateway_connection" "VneconnectiontoUKSouthcir
 
    
 }
+*/

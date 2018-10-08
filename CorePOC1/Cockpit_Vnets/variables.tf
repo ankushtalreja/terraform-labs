@@ -96,3 +96,30 @@ variable "Environment" {
 
 }
 
+variable "loganalyticsRGname" {
+    
+  default = "loganWERG"
+  description = "Specify the name of resource group for log analytics workspace"
+
+}
+
+variable "LAworkspacename" {
+    
+  default = "networkla01"
+  description = "Specify the name of log analytics workspace"
+
+}
+
+variable "SAresourcegroupname" {
+    
+  default = ["logsargNE", "logsargWE"]
+  description = "Specify the name of resource group for storage account(logs) resprectively"
+
+}
+
+variable "storageaccname" {
+    
+  default = ["logsargne01", "logsargwe01"]
+  description = "Specify the name of storage accounts for logs resprectively"
+
+}
