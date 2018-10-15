@@ -127,7 +127,7 @@ resource "azurerm_virtual_network_gateway_connection" "VnteconnectiontoNEcircuit
   
 }
 
-//connecting both gateways to UkSuuth Cicuit
+//connecting both gateways to UkSouth Cicuit
 //If vnets created are in non-prod subscription i.e. authorization key required
 resource "azurerm_virtual_network_gateway_connection" "VneconnectiontoUKSouthcircuitnonprod" {
 
